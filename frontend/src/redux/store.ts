@@ -13,6 +13,7 @@ import {
 } from 'redux-persist';
 
 import storage from 'redux-persist/lib/storage';
+import { bookApi } from './services/bookApi';
 
 const persistConfig = {
     key: 'root',
@@ -20,7 +21,9 @@ const persistConfig = {
     storage,
 };
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+    [bookApi.reducerPath]: bookApi.reducer,
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -31,7 +34,7 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(),
+        }).concat(bookApi.middleware),
 });
 
 export let persistor = persistStore(store);
