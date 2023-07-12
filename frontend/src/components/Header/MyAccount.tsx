@@ -1,3 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
+'use client';
+
 import { FunctionComponent } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css'; // optional
@@ -5,10 +8,18 @@ import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { useAppSelector } from '@/redux/hooks';
+import IsLogin from './IsLogin';
 
 interface MyAccountProps {}
 
 const MyAccount: FunctionComponent<MyAccountProps> = () => {
+    const currentUser = useAppSelector((state) => state.auth.currentUser);
+
+    if (currentUser.isLogin) {
+        return <IsLogin />;
+    }
+
     return (
         <Tippy
             interactive
@@ -20,14 +31,14 @@ const MyAccount: FunctionComponent<MyAccountProps> = () => {
                 >
                     <Link
                         className=" hover:bg-neutral-200 hover-smooth w-full py-4 items-center flex justify-center"
-                        href="/login"
+                        href="/signIn"
                     >
                         <FontAwesomeIcon icon={faRightToBracket} className="mr-2" />
                         <p>Đăng nhập</p>
                     </Link>
                     <Link
                         className="hover:bg-neutral-200 hover-smooth w-full py-4 items-center flex justify-center"
-                        href="/register"
+                        href="/signUp"
                     >
                         <FontAwesomeIcon icon={faUserPlus} className="mr-2" />
                         <p>Đăng ký</p>

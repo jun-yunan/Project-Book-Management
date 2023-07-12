@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/dist/query';
+// import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
 import {
     persistStore,
@@ -14,6 +15,8 @@ import {
 
 import storage from 'redux-persist/lib/storage';
 import { bookApi } from './services/bookApi';
+import authReducer from './features/authSlice';
+import { authApi } from './services/authApi';
 
 const persistConfig = {
     key: 'root',
@@ -23,6 +26,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     [bookApi.reducerPath]: bookApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
+    auth: authReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -34,7 +39,7 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(bookApi.middleware),
+        }).concat(bookApi.middleware, authApi.middleware),
 });
 
 export let persistor = persistStore(store);

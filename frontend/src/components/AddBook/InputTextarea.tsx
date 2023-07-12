@@ -40,7 +40,7 @@ export default function ExampleTextareaComment() {
                             onClick={(event) => setAnchorEl(event.currentTarget)}
                         >
                             <FormatBold />
-                            <KeyboardArrowDown fontSize="md" />
+                            <KeyboardArrowDown />
                         </IconButton>
                         <Menu
                             anchorEl={anchorEl}
@@ -61,7 +61,7 @@ export default function ExampleTextareaComment() {
                                     sx={{ fontWeight: weight }}
                                 >
                                     <ListItemDecorator>
-                                        {fontWeight === weight && <Check fontSize="sm" />}
+                                        {fontWeight === weight && <Check />}
                                     </ListItemDecorator>
                                     {weight === '200' ? 'lighter' : weight}
                                 </MenuItem>

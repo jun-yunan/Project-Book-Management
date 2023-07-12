@@ -31,6 +31,11 @@ const Header: FunctionComponent<HeaderProps> = () => {
                     <p>Thêm sách</p>
                 </ItemLink>
 
+                <ItemLink path="/create-book-borrowing-form">
+                    <AddCircleOutlineRoundedIcon />
+                    <p>Tạo phiếu mượn sách</p>
+                </ItemLink>
+
                 <div className="flex items-center justify-between bg-white rounded-lg overflow-hidden px-3 py-2 w-[260px] phone:w-[150px] focus-within:w-[300px] transition-all duration-500 ease-in-out">
                     <input
                         type="text"

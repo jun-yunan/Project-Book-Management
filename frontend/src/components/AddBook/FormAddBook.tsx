@@ -11,6 +11,8 @@ import { useAddBookMutation } from '@/redux/services/bookApi';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import InputSelect from '../Form/InputSelect';
+import CountrySelect from '../Form/CountrySelect';
 
 interface FormAddBookProps {}
 
@@ -24,6 +26,9 @@ const schema = yup
         summary: yup.string().required(),
         publishingCompany: yup.string().required(),
         author: yup.string().required(),
+        bookCategory: yup.string().required(),
+        language: yup.string().required(),
+        specialized: yup.string().required(),
     })
     .required();
 
@@ -78,123 +83,150 @@ const FormAddBook = () => {
     };
 
     return (
-        <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col w-full  items-center min-h-[700px] text-[#161617]"
-        >
-            <TextField
-                sx={{ width: '70%', marginBottom: '16px', color: 'white' }}
-                className="rounded-sm"
-                id="outlined-basic"
-                label="Tên sách"
-                variant="outlined"
-                {...register('name')}
-                error={!!errors.name}
-                helperText={errors?.name?.message}
-            />
-            <TextField
-                sx={{ width: '70%', marginBottom: '16px' }}
-                className="rounded-sm"
-                id="outlined-basic"
-                label="Tác giả"
-                variant="outlined"
-                {...register('author')}
-                error={!!errors.author}
-                helperText={errors?.author?.message}
-            />
-            <TextField
-                sx={{ width: '70%', marginBottom: '16px' }}
-                type="number"
-                className="rounded-sm"
-                id="outlined-basic"
-                label="Số trang"
-                variant="outlined"
-                {...register('numberPage')}
-                error={!!errors.numberPage}
-                helperText={errors?.numberPage?.message}
-            />
-            <TextField
-                type="number"
-                sx={{ width: '70%', marginBottom: '16px' }}
-                className="rounded-sm"
-                id="outlined-basic"
-                label="Giá sách"
-                variant="outlined"
-                {...register('price')}
-                error={!!errors.price}
-                helperText={errors?.price?.message}
-            />
-            <TextField
-                sx={{ width: '70%', marginBottom: '16px' }}
-                className="rounded-sm"
-                id="outlined-basic"
-                label="Nhà xuất bản"
-                variant="outlined"
-                {...register('publishingCompany')}
-                error={!!errors.publishingCompany}
-                helperText={errors?.publishingCompany?.message}
-            />
-            <TextField
-                type="date"
-                defaultValue={currentDate}
-                sx={{ width: '70%', marginBottom: '16px' }}
-                className="rounded-sm"
-                id="outlined-basic"
-                label="Ngày xuất bản"
-                variant="outlined"
-                {...register('publishingDate')}
-                error={!!errors.publishingDate}
-                helperText={errors?.publishingDate?.message}
-            />
-
-            <textarea
-                placeholder="Mô tả sách..."
-                className="text-[#161617] bg-transparent border border-neutral-400 w-[70%] p-4"
-                rows={5}
-                {...register('summary')}
-            />
-            <div className="w-[70%] h-[200px] flex items-center justify-between mt-[16px]">
-                <div className=" w-[70%] h-full rounded-lg border-2 border-neutral-400 shadow-xl">
-                    {previewImage ? (
-                        <img src={previewImage} alt="" className="object-cover w-full h-full" />
-                    ) : (
-                        <div></div>
-                    )}
-                </div>
-                <div className="flex flex-col  self-end">
-                    <label
-                        htmlFor="file-image"
-                        className="text-[#161617] flex items-center justify-between mb-6 cursor-pointer px-4 rounded-lg hover:bg-[#161617] hover-smooth hover:text-white border-2 border-[#161617] text-lg font-medium"
-                    >
-                        <FontAwesomeIcon icon={faImage} className="mr-2" />
-                        <p>Chọn ảnh</p>
-                    </label>
-                    <button
-                        onClick={() => setPreviewImage('')}
-                        className="text-[#161617] cursor-pointer px-4 rounded-lg hover:bg-[#161617] hover-smooth hover:text-white border-2 border-[#161617] text-lg font-medium"
-                    >
-                        <FontAwesomeIcon icon={faTrash} className="mr-2" />
-                        Xoá ảnh
-                    </button>
-                </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex w-full h-full text-[#161617]">
+            <div className="flex flex-col w-[50%] items-center">
+                <TextField
+                    sx={{ width: '70%', marginBottom: '16px', color: 'white' }}
+                    className="rounded-sm"
+                    id="outlined-basic"
+                    label="Tên sách"
+                    variant="outlined"
+                    {...register('name')}
+                    error={!!errors.name}
+                    helperText={errors?.name?.message}
+                />
+                <TextField
+                    sx={{ width: '70%', marginBottom: '16px' }}
+                    className="rounded-sm"
+                    id="outlined-basic"
+                    label="Tác giả"
+                    variant="outlined"
+                    {...register('author')}
+                    error={!!errors.author}
+                    helperText={errors?.author?.message}
+                />
+                <TextField
+                    sx={{ width: '70%', marginBottom: '16px' }}
+                    type="number"
+                    className="rounded-sm"
+                    id="outlined-basic"
+                    label="Số trang"
+                    variant="outlined"
+                    {...register('numberPage')}
+                    error={!!errors.numberPage}
+                    helperText={errors?.numberPage?.message}
+                />
+                <TextField
+                    type="number"
+                    sx={{ width: '70%', marginBottom: '16px' }}
+                    className="rounded-sm"
+                    id="outlined-basic"
+                    label="Giá sách"
+                    variant="outlined"
+                    {...register('price')}
+                    error={!!errors.price}
+                    helperText={errors?.price?.message}
+                />
+                <TextField
+                    sx={{ width: '70%', marginBottom: '16px' }}
+                    className="rounded-sm"
+                    id="outlined-basic"
+                    label="Nhà xuất bản"
+                    variant="outlined"
+                    {...register('publishingCompany')}
+                    error={!!errors.publishingCompany}
+                    helperText={errors?.publishingCompany?.message}
+                />
+                <TextField
+                    type="date"
+                    defaultValue={currentDate}
+                    sx={{ width: '70%', marginBottom: '16px' }}
+                    className="rounded-sm"
+                    id="outlined-basic"
+                    label="Ngày xuất bản"
+                    variant="outlined"
+                    {...register('publishingDate')}
+                    error={!!errors.publishingDate}
+                    helperText={errors?.publishingDate?.message}
+                />
+                <InputSelect register={register} />
+                {/* <TextField
+                    sx={{ width: '70%', marginBottom: '16px' }}
+                    className="rounded-sm"
+                    id="outlined-basic"
+                    label="Thể loại sách"
+                    variant="outlined"
+                    {...register('bookCategory')}
+                    error={!!errors.bookCategory}
+                    helperText={errors?.bookCategory?.message}
+                /> */}
             </div>
-            <input
-                type="file"
-                hidden
-                id="file-image"
-                {...register('image')}
-                accept="image/*"
-                onChange={handleImageUpload}
-            />
 
-            <div className="w-full border border-neutral-300 my-10"></div>
+            <div className="flex flex-col w-[50%] items-center">
+                {/* <TextField
+                    sx={{ width: '70%', marginBottom: '16px' }}
+                    className="rounded-sm"
+                    id="outlined-basic"
+                    label="Ngôn ngữ"
+                    variant="outlined"
+                    {...register('language')}
+                    error={!!errors.language}
+                    helperText={errors?.language?.message}
+                /> */}
+                <CountrySelect register={register} />
 
-            <button
-                type="submit"
-                className="text-[#161617]  w-[40%] rounded-lg hover:bg-[#161617] hover-smooth hover:text-white self-end mr-[15%] mb-6 border-2 border-[#161617] px-6 py-2 text-lg font-medium"
-            >
-                Lưu thông tin
-            </button>
+                <TextField
+                    sx={{ width: '70%', marginBottom: '16px' }}
+                    className="rounded-sm"
+                    id="outlined-basic"
+                    label="Chuyên ngành"
+                    variant="outlined"
+                    {...register('specialized')}
+                    error={!!errors.specialized}
+                    helperText={errors?.specialized?.message}
+                />
+
+                <textarea
+                    placeholder="Mô tả sách..."
+                    className="text-[#161617] bg-transparent border border-neutral-400 w-[70%] p-4"
+                    rows={5}
+                    {...register('summary')}
+                />
+                <div className="w-[70%] h-[200px] flex items-center justify-between mt-[16px]">
+                    <div className=" w-[70%] h-full rounded-lg border-2 border-neutral-400 shadow-xl">
+                        {previewImage ? (
+                            <img src={previewImage} alt="" className="object-cover w-full h-full" />
+                        ) : (
+                            <div></div>
+                        )}
+                    </div>
+                    <div className="flex flex-col  self-end">
+                        <label
+                            htmlFor="file-image"
+                            className="text-[#161617] flex items-center justify-between mb-6 cursor-pointer px-4 rounded-lg hover:bg-[#161617] hover-smooth hover:text-white border-2 border-[#161617] text-lg font-medium"
+                        >
+                            <FontAwesomeIcon icon={faImage} className="mr-2" />
+                            <p>Chọn ảnh</p>
+                        </label>
+                        <button
+                            onClick={() => setPreviewImage('')}
+                            className="text-[#161617] cursor-pointer px-4 rounded-lg hover:bg-[#161617] hover-smooth hover:text-white border-2 border-[#161617] text-lg font-medium"
+                        >
+                            <FontAwesomeIcon icon={faTrash} className="mr-2" />
+                            Xoá ảnh
+                        </button>
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    hidden
+                    id="file-image"
+                    {...register('image')}
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                />
+                <input type="submit" hidden id="submitForm" />
+            </div>
         </form>
     );
 };

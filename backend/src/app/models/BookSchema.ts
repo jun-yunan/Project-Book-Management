@@ -1,6 +1,6 @@
 import mongoose, { Date, Schema, Types } from 'mongoose';
 
-interface IBook {
+export interface IBook {
     name: string;
     publishingDate: string;
     price: number;
@@ -10,7 +10,7 @@ interface IBook {
     authorId: Types.ObjectId;
     languageId: Types.ObjectId;
     publishingCompanyId: Types.ObjectId;
-    typeBookId: Types.ObjectId;
+    bookCategoryId: Types.ObjectId;
     specializedId: Types.ObjectId;
 }
 
@@ -30,7 +30,7 @@ const BookSchema = new Schema<IBook>(
         authorId: { type: Schema.Types.ObjectId, ref: 'Author' },
         languageId: { type: Schema.Types.ObjectId, ref: 'Language' },
         publishingCompanyId: { type: Schema.Types.ObjectId, ref: 'PublishingCompany' },
-        typeBookId: { type: Schema.Types.ObjectId, ref: 'TypeBook' },
+        bookCategoryId: { type: Schema.Types.ObjectId, ref: 'TypeBook' },
         specializedId: { type: Schema.Types.ObjectId, ref: 'Specialized' },
     },
     { timestamps: true },

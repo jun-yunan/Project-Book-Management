@@ -7,4 +7,7 @@ export type FormBook = {
     summary: string;
     publishingCompany: string;
     author: string;
+    bookCategory: string;
+    language: string;
+    specialized: string;
 };

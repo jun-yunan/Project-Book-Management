@@ -1,6 +1,6 @@
 import mongoose, { Date, Schema, Types } from 'mongoose';
 
-interface IAuth {
+export interface IAuth {
     name: string;
     gender: string;
     birthDay: string;
@@ -8,19 +8,19 @@ interface IAuth {
     address: string;
     email: string;
     avatar: string;
-    bookId: Types.ObjectId;
+    bookId: Types.ObjectId[];
 }
 
 const AuthSchema = new Schema<IAuth>(
     {
-        name: { type: String, required: true },
-        gender: { type: String, required: true },
-        birthDay: { type: String, required: true },
+        name: { type: String, required: true, unique: true },
+        gender: { type: String },
+        birthDay: { type: String },
         numberPhone: { type: String },
         address: { type: String },
         email: { type: String },
         avatar: { type: String },
-        bookId: { type: Schema.Types.ObjectId, ref: 'Book' },
+        bookId: [{ type: Schema.Types.ObjectId, ref: 'Book' }],
     },
     { timestamps: true },
 );
