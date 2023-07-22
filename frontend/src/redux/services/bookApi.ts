@@ -1,13 +1,22 @@
 import { FormBook } from '@/types/Form';
 import { IGetBooks } from '@/types/book';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { RootState } from '../store';
 
 export const bookApi = createApi({
     reducerPath: 'bookApi',
     tagTypes: ['Books'],
-    refetchOnMountOrArgChange: 10,
-    // keepUnusedDataFor: 30,
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5500/api' }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: 'http://localhost:5500/api',
+        prepareHeaders: (headers, { getState }) => {
+            const accessToken = (getState() as RootState).auth.currentUser.accessToken;
+
+            if (accessToken) {
+                headers.set('authorization', `JWT ${accessToken}`);
+            }
+            return headers;
+        },
+    }),
     endpoints: (builder) => ({
         addBook: builder.mutation<any, any>({
             query: (data) => ({
@@ -23,7 +32,7 @@ export const bookApi = createApi({
         }),
         createBookBorrowingForm: builder.mutation<any, any>({
             query: (data) => ({
-                url: ``,
+                url: `/create-book-borrowing-form`,
                 method: 'POST',
                 body: data,
             }),

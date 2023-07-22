@@ -52,6 +52,10 @@ export default function InputSelect({ register }: any) {
                         Văn học thiếu nhi (Children&apos;s Literature)
                     </MenuItem>
                     <MenuItem value="Nghệ thuật (Art)">Nghệ thuật (Art)</MenuItem>
+                    <MenuItem value="Tôn giáo (Religion)">Tôn giáo (Religion)</MenuItem>
+                    <MenuItem value="Văn học kỹ năng sống (Literature on Life Skills)">
+                        Văn học kỹ năng sống (Literature on Life Skills)
+                    </MenuItem>
                 </Select>
             </FormControl>
         </Box>

@@ -1,11 +1,11 @@
 import cloudinary from '../../config/cloudinaryConfig';
 import { Response, Request, NextFunction } from 'express';
-import BookSchema, { IBook } from '../models/BookSchema';
-import AuthorSchema, { IAuth } from '../models/AuthorSchema';
-import PublishingCompanySchema, { IPublishingCompany } from '../models/PublishingCompanySchema';
-import LanguageSchema, { ILanguage } from '../models/LanguageSchema';
-import BookCategorySchema, { IBookCategory } from '../models/BookCategorySchema';
-import SpecializedSchema, { ISpecialized } from '../models/SpecializedSchema';
+import BookSchema from '../models/BookSchema';
+import AuthorSchema from '../models/AuthorSchema';
+import PublishingCompanySchema from '../models/PublishingCompanySchema';
+import LanguageSchema from '../models/LanguageSchema';
+import BookCategorySchema from '../models/BookCategorySchema';
+import SpecializedSchema from '../models/SpecializedSchema';
 
 class BookController {
     async addBook(req: Request, res: Response) {

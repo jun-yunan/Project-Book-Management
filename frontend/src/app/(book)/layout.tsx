@@ -12,9 +12,9 @@ const LayoutAddBook: FunctionComponent<LayoutAddBookProps> = ({ children }) => {
                 // src="https://images.pexels.com/photos/1470162/pexels-photo-1470162.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 src="https://images.pexels.com/photos/762686/pexels-photo-762686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt=""
-                className="w-full object-cover"
+                className="w-full object-cover absolute"
             />
-            {children}
+            <div className="z-10 w-full flex justify-center">{children}</div>
         </div>
     );
 };

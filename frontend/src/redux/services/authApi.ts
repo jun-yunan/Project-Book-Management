@@ -11,11 +11,14 @@ export const authApi = createApi({
                 body: { email, password },
             }),
         }),
-        signUp: builder.mutation<any, { name: string; email: string; password: string }>({
-            query: ({ email, name, password }) => ({
+        signUp: builder.mutation<
+            any,
+            { name?: string; firstName: string; lastName: string; email: string; password: string }
+        >({
+            query: ({ email, name, password, firstName, lastName }) => ({
                 url: `/auth/signUp`,
                 method: 'POST',
-                body: { email, name, password },
+                body: { email, name, password, firstName, lastName },
             }),
         }),
     }),

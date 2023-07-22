@@ -7,9 +7,10 @@ import 'tippy.js/dist/tippy.css'; // optional
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserPlus, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { faUserPlus, faRightToBracket, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector } from '@/redux/hooks';
 import IsLogin from './IsLogin';
+import IconUser from './IconUser';
 
 interface MyAccountProps {}
 
@@ -22,6 +23,7 @@ const MyAccount: FunctionComponent<MyAccountProps> = () => {
 
     return (
         <Tippy
+            placement="bottom"
             interactive
             render={(attrs) => (
                 <div
@@ -46,10 +48,12 @@ const MyAccount: FunctionComponent<MyAccountProps> = () => {
                 </div>
             )}
         >
-            <div className="flex items-center cursor-pointer">
-                <AccountCircleRoundedIcon className="mr-1" />
-                <p>My Account</p>
-            </div>
+            <Link
+                href={'/signIn'}
+                className="tex-4xl text-[#0a66c2] dark:bg-sky-500 dark:hover:bg-white dark:hover:text-[#0a66c2] dark:text-white border-2 border-[#0a66c2] hover-smooth hover:bg-sky-100 py-2 px-6 rounded-3xl font-semibold"
+            >
+                <p>Login</p>
+            </Link>
         </Tippy>
     );
 };

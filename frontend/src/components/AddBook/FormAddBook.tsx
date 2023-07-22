@@ -150,29 +150,9 @@ const FormAddBook = () => {
                     helperText={errors?.publishingDate?.message}
                 />
                 <InputSelect register={register} />
-                {/* <TextField
-                    sx={{ width: '70%', marginBottom: '16px' }}
-                    className="rounded-sm"
-                    id="outlined-basic"
-                    label="Thể loại sách"
-                    variant="outlined"
-                    {...register('bookCategory')}
-                    error={!!errors.bookCategory}
-                    helperText={errors?.bookCategory?.message}
-                /> */}
             </div>
 
             <div className="flex flex-col w-[50%] items-center">
-                {/* <TextField
-                    sx={{ width: '70%', marginBottom: '16px' }}
-                    className="rounded-sm"
-                    id="outlined-basic"
-                    label="Ngôn ngữ"
-                    variant="outlined"
-                    {...register('language')}
-                    error={!!errors.language}
-                    helperText={errors?.language?.message}
-                /> */}
                 <CountrySelect register={register} />
 
                 <TextField

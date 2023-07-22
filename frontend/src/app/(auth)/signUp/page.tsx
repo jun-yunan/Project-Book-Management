@@ -6,7 +6,7 @@ interface SignUpPageProps {}
 const SignUpPage: FunctionComponent<SignUpPageProps> = () => {
     return (
         <div className=" w-full h-full bg-neutral-300 bg-opacity-40 flex justify-center">
-            <div className="w-[45%] h-[550px] bg-white mt-[20px] flex flex-col items-center rounded-xl shadow-xl">
+            <div className="w-[45%] h-[550px] bg-white mt-[50px] flex flex-col items-center rounded-xl shadow-xl">
                 <p className="text-2xl font-semibold my-6">Đăng ký tài khoản của bạn</p>
                 <div className="border  bg-neutral-300 w-full"></div>
                 <FormSignUp />

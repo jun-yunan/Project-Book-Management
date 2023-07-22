@@ -1,9 +1,12 @@
 import mongoose, { Types, Schema } from 'mongoose';
 
 export interface IMember {
+    firstName?: string;
+    lastName?: string;
     name: string;
     gender: string;
     email: string;
+    country: string;
     authentication: {
         password: string;
         refreshToken: string;
@@ -19,9 +22,12 @@ export interface IMember {
 
 const MemberSchema = new Schema<IMember>(
     {
+        lastName: { type: String },
+        firstName: { type: String },
         name: { type: String },
         gender: { type: String },
         email: { type: String },
+        country: { type: String },
         authentication: {
             password: { type: String, required: true, select: false },
             refreshToken: { type: String, select: false },
@@ -31,7 +37,6 @@ const MemberSchema = new Schema<IMember>(
         numberPhone: { type: String },
         birthDay: { type: String },
         memberType: { type: String },
-        // registrationDate: { type: Date },
         status: { type: String },
         bookBorrowingForm: { type: Schema.Types.ObjectId, ref: 'BookBorrowingForm' },
     },

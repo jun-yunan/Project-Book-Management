@@ -1,11 +1,13 @@
 import express from 'express';
-import users from './users';
+import book from './book';
 import auth from './auth';
+import user from './user';
 
 const router = express.Router();
 
 export default (): express.Router => {
-    users(router);
+    user(router);
+    book(router);
     auth(router);
     return router;
 };

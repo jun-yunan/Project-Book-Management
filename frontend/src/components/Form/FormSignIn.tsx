@@ -55,8 +55,8 @@ const FormSignIn: FunctionComponent<FormSignInProps> = () => {
     useEffect(() => {
         if (resultSignIn.isSuccess) {
             dispatch(setInfoUser(resultSignIn.data));
+            router.push('/');
         }
-        router.push('/');
     }, [dispatch, resultSignIn, router]);
 
     return (

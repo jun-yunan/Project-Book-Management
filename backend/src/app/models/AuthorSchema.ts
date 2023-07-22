@@ -1,6 +1,6 @@
 import mongoose, { Date, Schema, Types } from 'mongoose';
 
-export interface IAuth {
+export interface IAuthor {
     name: string;
     gender: string;
     birthDay: string;
@@ -11,7 +11,7 @@ export interface IAuth {
     bookId: Types.ObjectId[];
 }
 
-const AuthSchema = new Schema<IAuth>(
+const AuthorSchema = new Schema<IAuthor>(
     {
         name: { type: String, required: true, unique: true },
         gender: { type: String },
@@ -25,4 +25,4 @@ const AuthSchema = new Schema<IAuth>(
     { timestamps: true },
 );
 
-export default mongoose.model<IAuth>('Author', AuthSchema);
+export default mongoose.model<IAuthor>('Author', AuthorSchema);

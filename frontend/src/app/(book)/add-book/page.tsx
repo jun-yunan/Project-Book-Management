@@ -8,7 +8,7 @@ interface AddBookProps {}
 
 const AddBook: FunctionComponent<AddBookProps> = () => {
     return (
-        <div className="absolute w-[90%] min-h-[500px] shadow-xl rounded-xl m-8 bg-white bg-opacity-90 flex flex-col items-center">
+        <div className="w-[90%] h-[800px] shadow-xl rounded-xl m-8 bg-white bg-opacity-90 flex flex-col items-center">
             <h2 className="text-2xl font-semibold mt-4">Nhập thông tin sách</h2>
             <div className="border border-neutral-300 w-full my-6"></div>
             <FormAddBook />

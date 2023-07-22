@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { hash, compare } from 'bcrypt';
-import { generateAccessToken, generateRefreshToken } from '../helpers/authenticationJWT';
+import { generateAccessToken, generateRefreshToken } from '../../helpers/authenticationJWT';
 import MemberSchema from '../models/MemberSchema';
 
 class AuthController {
@@ -25,8 +25,8 @@ class AuthController {
 
             const { authentication, ...otherMember } = member;
 
-            const accessToken = generateAccessToken({ otherMember });
-            const refreshToken = generateRefreshToken({ otherMember });
+            const accessToken = generateAccessToken(otherMember);
+            const refreshToken = generateRefreshToken(otherMember);
 
             const updateMember = await MemberSchema.findOneAndUpdate(
                 { _id: member._id },
@@ -53,8 +53,15 @@ class AuthController {
 
     async signUp(req: Request, res: Response) {
         try {
-            const { email, name, password }: { email: string; name: string; password: string } = req.body;
-            if (!email || !name || !password) {
+            const {
+                email,
+                name,
+                firstName,
+                lastName,
+                password,
+            }: { email: string; name: string; password: string; firstName: string; lastName: string } =
+                req.body;
+            if (!email || !firstName || !lastName || !password) {
                 return res.status(400).json({ message: 'email, name, password is required!!!' });
             }
 
@@ -68,6 +75,8 @@ class AuthController {
             const member = await MemberSchema.create({
                 name,
                 email,
+                firstName,
+                lastName,
                 authentication: { password: hashedPassword },
             }).catch((error) => {
                 if (error) {

@@ -5,7 +5,7 @@ const accessTokenSecretKey = process.env.ACCESS_TOKEN_SECRET_KEY;
 const refreshTokenSecretKey = process.env.REFRESH_TOKEN_SECRET_KEY;
 
 export const generateAccessToken = (payload: {}) => {
-    const accessToken = sign(payload, accessTokenSecretKey, { expiresIn: '30s' });
+    const accessToken = sign(payload, accessTokenSecretKey, { expiresIn: '1h' });
     return accessToken;
 };
 

@@ -10,11 +10,12 @@ import { useCreateBookBorrowingFormMutation, useGetBooksQuery } from '@/redux/se
 import { toast } from 'react-toastify';
 
 import { Select, SelectProps } from 'antd';
+import axios from 'axios';
 
 interface CreateBookBorrowingFormProps {}
 export interface IForm {
     dueDate: string;
-    user: string;
+    member: string;
     bookTitle: string;
     quantity: number;
     librarian: string;
@@ -31,7 +32,7 @@ const CreateBookBorrowingForm: FunctionComponent<CreateBookBorrowingFormProps> =
     const schema = yup
         .object({
             dueDate: yup.string().required('Ngày trả sách là bắt buộc!'),
-            user: yup.string().required('Email hoặc Id là trường bắt buộc!'),
+            member: yup.string().required('Email hoặc Id là trường bắt buộc!'),
             bookTitle: yup.string(),
             librarian: yup.string().required('Email hoặc Id là trường bắt buộc!'),
             quantity: yup
@@ -49,6 +50,8 @@ const CreateBookBorrowingForm: FunctionComponent<CreateBookBorrowingFormProps> =
         formState: { errors },
     } = useForm<IForm>({ resolver: yupResolver(schema) });
 
+    axios('', { withCredentials: true });
+
     const onSubmit: SubmitHandler<IForm> = async (data) => {
         try {
             if (data && bookTitle) {
@@ -61,6 +64,11 @@ const CreateBookBorrowingForm: FunctionComponent<CreateBookBorrowingFormProps> =
             toast.warn('Chọn sách là bắt buộc!!!');
         } catch (error) {
             console.error(error);
+
+            toast.error(
+                (error as { data: { message: string; error: {} | string }; status: number }).data.message ||
+                    (error as { data: { message: string; error: string }; status: number }).data.error,
+            );
         }
     };
 
@@ -121,9 +129,9 @@ const CreateBookBorrowingForm: FunctionComponent<CreateBookBorrowingFormProps> =
                 id="outlined-basic"
                 label="Email thành viên hoặc ID"
                 variant="outlined"
-                {...register('user')}
-                error={!!errors.user}
-                helperText={errors?.user?.message}
+                {...register('member')}
+                error={!!errors.member}
+                helperText={errors?.member?.message}
             />
             <TextField
                 sx={{ width: '100%', marginBottom: '16px' }}
